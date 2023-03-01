@@ -11,59 +11,34 @@ given Conversion[String, RegularLanguage] = S2RLHelper(_)
 
 
 def S2RLHelper(s:String): RegularLanguage = 
-    if s == "" then return Empty
-    else return Concat(Character(s.head), S2RLHelper(s.tail))
+    if s.length() == 1 then Character(s.head)
+    else Concat(Character(s.head), S2RLHelper(s.tail))
 
-// def ||(regex1:RegularLanguage, regex2: RegularLanguage): RegularLanguage =
-//     Union(regex1, regex2)
 
-implicit class Operators(regex1 :RegularLanguage) {
+extension (regex1: RegularLanguage)
   def ||(regex2 :RegularLanguage) : RegularLanguage = 
     Union(regex1, regex2)
   def ~(regex2: RegularLanguage) : RegularLanguage = 
     Concat(regex1, regex2)
   def <*> : RegularLanguage = 
     Star(regex1)
+  def <+> : RegularLanguage = 
+    Concat(regex1, regex1 <*>)
   def apply(int: Int): RegularLanguage = 
-    if int == 0 then Empty
+    if int == 1 then regex1
     else Concat(regex1, regex1{int - 1})
-}
-
-implicit class OperatorsForString(regex1 :String) {
-  def ||(regex2 :String) : RegularLanguage = 
-    Union(S2RLHelper(regex1), S2RLHelper(regex2))
-  def ~(regex2 :String) : RegularLanguage = 
-    Concat(S2RLHelper(regex1), S2RLHelper(regex2))
-  def <*> : RegularLanguage = 
-    Star(S2RLHelper(regex1))
-  def apply(int: Int): RegularLanguage = 
-    if int == 0 then Empty
-    else Concat(S2RLHelper(regex1), S2RLHelper(regex1){int - 1})
-}
-
-// implicit class OperatorsForChar(regex1 :Char) {
-//   def ||(regex2 :Char) : RegularLanguage = 
-//     Union(S2RLHelper(regex1), S2RLHelper(regex2))
-//   def ~(regex2 :String) : RegularLanguage = 
-//     Concat(S2RLHelper(regex1), S2RLHelper(regex2))
-//   def <*> : RegularLanguage = 
-//     Star(S2RLHelper(regex1))
-//   def apply(int: Int): RegularLanguage = 
-//     if int == 0 then Empty
-//     else Concat(S2RLHelper(regex1), S2RLHelper(regex1){int - 1})
-// }
+  def toDFA(using alphabet: Set[Char]) = 
+    regexToDFA(regex1, alphabet)
 
 
 
 
-  val zero1 = '0'
-  val zero2 = '0'
+// Testing Compiling
 
-
-
-
-val newRegex = "1"||"2"
-val newRegex2 = zero1||zero2
-
+val zero1 = '0'
+val zero2 = '0'
+val newRegex = '1'||'2'
+val newRegex3 = newRegex<+>
+val newRegex2 = zero1 || zero2
 val starRegex = Character('1')<*>
 val applyRegex = Character('1'){5}

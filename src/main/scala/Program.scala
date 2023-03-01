@@ -1,5 +1,5 @@
 import machines.regex._
-
+import machines.given
 @main
 def main() = {
 
@@ -14,6 +14,17 @@ def main() = {
   //     etc.
   //
 
+  def S2RLHelper(s:String): RegularLanguage = 
+    if s == "" then return Empty
+    else return Concat(Character(s.head), S2RLHelper(s.tail))
+
+  given Conversion[Char, RegularLanguage] = new Character(_)
+  given Conversion[String, RegularLanguage] = S2RLHelper(_)
+
+
+
+
+  val zero1 = '0'
   val zero = Character('0')
   val one = Character('1')
   val two = Character('2')

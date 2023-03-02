@@ -15,18 +15,6 @@ def main() = {
   //     etc.
   //
 
-//  val zero1 = '0'
-//   val zero = Character('0')
-//   val one = Character('1')
-//   val two = Character('2')
-//   val three = Character('3')
-//   val four = Character('4')
-//   val five = Character('5')
-//   val six = Character('6')
-//   val seven = Character('7')
-//   val eight = Character('8')
-//   val nine = Character('9')
-
   val zero = '0'
   val one = '1'
   val two = '2'
@@ -58,10 +46,6 @@ def main() = {
   val answer = "42"
   //
 
-  // val answer = Concat(four, two)
-  // val answer = "42"
-  // val thing = answer matches "42"
-
   require(answer matches "42")
 
   //////////////////////////////////////////////////////////////////////////////
@@ -72,20 +56,6 @@ def main() = {
   //
   val digit = '0' || '1' || '2' || '3' || '4' || '5' || '6' || '7' || '8' || '9'
   //
-
-  // val digit = Union(
-  //   zero,
-  //   Union(
-  //     one,
-  //     Union(
-  //       two,
-  //       Union(
-  //         three,
-  //         Union(four, Union(five, Union(six, Union(seven, Union(eight, nine)))))
-  //       )
-  //     )
-  //   )
-  // )
 
   require(digit matches "0")
   require(digit matches "1")
@@ -107,8 +77,6 @@ def main() = {
   val pi = '3' ~ '1' ~ '4'
   //
 
-  // val pi = Concat(Character('3'), Concat(Character('1'), Character('4')))
-
   require(pi matches "314")
 
   //////////////////////////////////////////////////////////////////////////////
@@ -119,8 +87,6 @@ def main() = {
   //
   val zeroOrMoreDigits = digit <*>
   //
-
-  // val zeroOrMoreDigits = Star(digit)
 
   require(zeroOrMoreDigits matches "")
   require(zeroOrMoreDigits matches "0")
@@ -137,8 +103,6 @@ def main() = {
   val number = digit <+>
   //
 
-  // val number = Concat(digit, zeroOrMoreDigits)
-
   require(!(number matches ""))
   require(number matches "0")
   require(number matches "9")
@@ -154,8 +118,6 @@ def main() = {
   val cThree = 'c'{3}
   //
 
-  // val cThree = Concat(Character('c'), Concat(Character('c'), Character('c')))
-
   require(cThree matches "ccc")
 
   //////////////////////////////////////////////////////////////////////////////
@@ -167,14 +129,6 @@ def main() = {
   //
   val pattern = "42" || ( ('a' <*>) ~ ('b' <+>) ~ ('c'{3}))
   //
-  
-  // val aStar = Star(Character('a'))
-  // val bPlus = Concat(Character('b'), Star(Character('b')))
-  // val pattern = Union(answer, Concat(aStar, Concat(bPlus, cThree)))
-
-  // val pattern2 = '4'  ~ '2'
-  // println(pattern)
-  // println(pattern2)
 
   require(pattern matches "42")
   require(pattern matches "bccc")
@@ -193,24 +147,6 @@ def main() = {
   val message = ("hello" <*>) ~ "world"
   //
 
-  // val hello = Concat(
-  //   Character('h'),
-  //   Concat(
-  //     Character('e'),
-  //     Concat(Character('l'), Concat(Character('l'), Character('o')))
-  //   )
-  // )
-
-  // val world = Concat(
-  //   Character('w'),
-  //   Concat(
-  //     Character('o'),
-  //     Concat(Character('r'), Concat(Character('l'), Character('d')))
-  //   )
-  // )
-
-  // val message = Concat(Star(hello), world)
-
   require(message matches "helloworld")
   require(message matches "world")
   require(message matches "hellohelloworld")
@@ -224,12 +160,6 @@ def main() = {
   //
   val telNumber = '(' ~ digit{3} ~ ')' ~ digit{3} ~ '-' ~ digit{4}
   //
-
-  // val threeDigits = Concat(digit, Concat(digit, digit))
-  // val fourDigits = Concat(threeDigits, digit)
-  // val areaCode = Concat(Character('('), Concat(threeDigits, Character(')')))
-  // val telNumber =
-    // Concat(areaCode, Concat(threeDigits, Concat(Character('-'), fourDigits)))
 
   require(telNumber matches "(202)456-1111")
 

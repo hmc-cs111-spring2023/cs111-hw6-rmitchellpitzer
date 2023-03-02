@@ -1,11 +1,11 @@
 # Reflection on implementing regular expressions of a DSL
 
 ## Which operators were easiest to implement and why?
-
+> I think the operators ||, ~, <*>, <+> were pretty easy to implement. They were all pretty easy to implement because it was mostly review from hw5 and was calling funcitons written in that assignment.
 ## Which operators were most difficult to implement and why?
-
+> The more difficult operators to implement were {n} as that was recursive/required knowledge of apply and could have been incorrect with the wrong base case returning Empty, and probably toDFA but I don't think that's an operator that's just extended in the same block.
 ## Comment on the design of this internal DSL
-
+> I think it's really cool! It does require much more effort than writing functions to do what you want in a general purpose language, but the upside is that this can be much more readable/understandable at a glance. It also allows for flexibility in implementation and usability. This could be seen in the implementation of toDFA and implicitly converting to DFA, and the operators created as Union/Concat/Star are still available to use but these new operators ||, ~, <*> and <+> now quicker shorthand and can provide more functionality such as in the case for <+> and {n}.
 Write a few brief paragraphs that discuss:
 
 - What works about this design? (For example, what things seem easy and
